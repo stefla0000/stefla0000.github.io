@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="怪怪水族馆攻略 - 本站提供怪怪水族馆全关卡流程解析、隐藏道具获取位置、鱼类图鉴收集进度查询及通关技巧指南，助你轻松通关。">
+    <meta name="keywords" content="怪怪水族馆攻略, 怪怪水族馆, 水族馆游戏, 捕鱼游戏, 手机游戏攻略">
+    <title>怪怪水族馆攻略-全关卡流程与隐藏道具获取指南</title>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #0088cc;
+            --secondary-color: #004466;
+            --accent-color: #ff9900;
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-light: #666666;
+            --border-radius: 12px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --spacing-unit: 20px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Header & Nav */
+        header {
+            background-color: var(--card-bg);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 24px;
+        }
+
+        nav a {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(180deg, rgba(0,136,204,0.1) 0%, rgba(244,247,246,1) 100%);
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            color: var(--secondary-color);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 32px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 32px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 30px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0, 136, 204, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 136, 204, 0.4);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 40px;
+        }
+
+        /* Sidebar */
+        aside {
+            position: sticky;
+            top: 80px;
+            height: fit-content;
+        }
+
+        .sidebar-card {
+            background: var(--card-bg);
+            padding: 24px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+
+        .sidebar-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 12px;
+        }
+
+        .level-list li {
+            margin-bottom: 10px;
+        }
+
+        .level-list a {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            transition: background 0.2s;
+        }
+
+        .level-list a:hover {
+            background-color: #f0f7fa;
+            color: var(--primary-color);
+        }
+
+        .level-list a.locked {
+            color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .level-list a.completed span.status {
+            color: #28a745;
+        }
+
+        /* Main Content */
+        main {
+            min-width: 0; /* Fix grid overflow */
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+        }
+
+        /* Fish Collection Grid */
+        .fish-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .fish-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 16px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fish-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .fish-card.collected::after {
+            content: '✓';
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 24px;
+            height: 24px;
+            background: #28a745;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .fish-icon {
+            width: 64px;
+            height: 64px;
+            background: #f0f8ff;
+            border-radius: 50%;
+            margin: 0 auto 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+
+        .fish-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+
+        .fish-price {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* Strategy Articles */
+        .article-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .article-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (min-width: 768px) {
+            .article-card {
+                flex-direction: row;
+            }
+        }
+
+        .article-img {
+            width: 100%;
+            height: 200px;
+            background-color: #ddd;
+            object-fit: cover;
+        }
+
+        @media (min-width: 768px) {
+            .article-img {
+                width: 240px;
+                height: auto;
+            }
+        }
+
+        .article-content {
+            padding: 24px;
+            flex: 1;
+        }
+
+        .article-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            background: #eef6fb;
+            color: var(--primary-color);
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .article-title {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+
+        .article-excerpt {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+        }
+
+        .article-link {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin-top: 60px;
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            margin-bottom: 16px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            background: #fff;
+        }
+
+        .faq-question:hover {
+            background: #fafafa;
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+            background: #fdfdfd;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 500px; /* Arbitrary large height */
+            border-top: 1px solid #eee;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-col h4 {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .footer-col ul li a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            aside {
+                position: static;
+            }
+
+            .nav-container {
+                padding: 0 16px;
+            }
+
+            nav {
+                display: none; /* Simplification for mobile */
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="nav-container">
+        <a href="#" class="logo">
+            <span>怪怪水族馆</span> 攻略
+        </a>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">首页</a></li>
+                <li><a href="#levels">关卡攻略</a></li>
+                <li><a href="#collection">鱼类图鉴</a></li>
+                <li><a href="#guide">玩法技巧</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>解锁深海奥秘，轻松收集所有鱼类</h1>
+        <p>本站提供最全面的《怪怪水族馆》游戏攻略，包含所有关卡的详细步骤、隐藏道具位置以及鱼类图鉴收集进度查询。</p>
+        <a href="#guide" class="btn">开始阅读攻略</a>
+    </div>
+</section>
+
+<div class="container">
+    <aside>
+        <div class="sidebar-card">
+            <div class="sidebar-title">关卡进度</div>
+            <ul class="level-list">
+                <li><a href="#level-1" class="completed"><span>第1关：初识海洋</span><span class="status">✓</span></a></li>
+                <li><a href="#level-2" class="completed"><span>第2关：珊瑚礁</span><span class="status">✓</span></a></li>
+                <li><a href="#level-3" class="completed"><span>第3关：深海潜航</span><span class="status">✓</span></a></li>
+                <li><a href="#level-4" class="completed"><span>第4关：神秘洞穴</span><span class="status">✓</span></a></li>
+                <li><a href="#level-5" class="completed"><span>第5关：冰封海域</span><span class="status">✓</span></a></li>
+                <li><a href="#level-6" class="locked"><span>第6关：失落遗迹</span><span class="status">🔒</span></a></li>
+                <li><a href="#level-7" class="locked"><span>第7关：最终深渊</span><span class="status">🔒</span></a></li>
+            </ul>
+        </div>
+
+        <div class="sidebar-card">
+            <div class="sidebar-title">图鉴进度</div>
+            <div style="text-align: center; margin-bottom: 10px;">
+                <strong>收集率: 65%</strong>
+            </div>
+            <div style="height: 8px; background: #eee; border-radius: 4px; overflow: hidden;">
+                <div style="width: 65%; height: 100%; background: var(--primary-color);"></div>
+            </div>
+            <div style="margin-top: 12px; font-size: 0.9rem; color: #666;">
+                当前已收集: 42 / 65 种鱼类
+            </div>
+        </div>
+    </aside>
+
+    <main>
+        <!-- Featured Fish Collection -->
+        <section id="collection">
+            <div class="section-header">
+                <h2 class="section-title">稀有鱼类图鉴</h2>
+                <a href="#" class="article-link">查看完整图鉴 &rarr;</a>
+            </div>
+            <div class="fish-grid">
+                <div class="fish-card collected">
+                    <div class="fish-icon">🐠</div>
+                    <div class="fish-name">小丑鱼</div>
+                    <div class="fish-price">售价: $500</div>
+                </div>
+                <div class="fish-card collected">
+                    <div class="fish-icon">🐡</div>
+                    <div class="fish-name">河豚</div>
+                    <div class="fish-price">售价: $1200</div>
+                </div>
+                <div class="fish-card collected">
+                    <div class="fish-icon">🦈</div>
+                    <div class="fish-name">蓝鳍金枪鱼</div>
+                    <div class="fish-price">售价: $8500</div>
+                </div>
+                <div class="fish-card collected">
+                    <div class="fish-icon">🐙</div>
+                    <div class="fish-name">章鱼</div>
+                    <div class="fish-price">售价: $3000</div>
+                </div>
+                <div class="fish-card">
+                    <div class="fish-icon">🦑</div>
+                    <div class="fish-name">大王乌贼</div>
+                    <div class="fish-price">售价: $15000</div>
+                </div>
+                <div class="fish-card">
+                    <div class="fish-icon">🐋</div>
+                    <div class="fish-name">蓝鲸</div>
+                    <div class="fish-price">售价: $50000</div>
+                </div>
+                <div class="fish-card">
+                    <div class="fish-icon">🦑</div>
+                    <div class="fish-name">发光水母</div>
+                    <div class="fish-price">售价: $800</div>
+                </div>
+                <div class="fish-card">
+                    <div class="fish-icon">🦈</div>
+                    <div class="fish-name">大白鲨</div>
+                    <div class="fish-price">售价: $25000</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Strategy Articles -->
+        <section id="guide">
+            <div class="section-header">
+                <h2 class="section-title">通关技巧与指南</h2>
+            </div>
+            <div class="article-list">
+                <article class="article-card">
+                    <img src="https://picsum.photos/seed/fish1/240/200" alt="关卡攻略" class="article-img">
+                    <div class="article-content">
+                        <span class="article-tag">关卡攻略</span>
+                        <h3 class="article-title">第4关“神秘洞穴”通关详解：如何快速清理淤泥</h3>
+                        <p class="article-excerpt">在神秘洞穴关卡中，淤泥清理是最大的难点。本指南将教你如何利用气泡道具一次性清除大片区域，并找到隐藏的宝藏位置。</p>
+                        <a href="#" class="article-link">阅读全文 &rarr;</a>
+                    </div>
+                </article>
+
+                <article class="article-card">
+                    <img src="https://picsum.photos/seed/fish2/240/200" alt="隐藏道具" class="article-img">
+                    <div class="article-content">
+                        <span class="article-tag">隐藏道具</span>
+                        <h3 class="article-title">全关卡隐藏道具位置汇总：寻找遗失的钥匙</h3>
+                        <p class="article-excerpt">很多玩家错过了第2关和第5关的隐藏钥匙。我们整理了所有钥匙的坐标点，帮助您收集全部50个隐藏道具，解锁特殊成就。</p>
+                        <a href="#" class="article-link">阅读全文 &rarr;</a>
+                    </div>
+                </article>
+
+                <article class="article-card">
+                    <img src="https://picsum.photos/seed/fish3/240/200" alt="赚钱技巧" class="article-img">
+                    <div class="article-content">
+                        <span class="article-tag">经营技巧</span>
+                        <h3 class="article-title">如何快速积累金币？水族馆经营效率最大化指南</h3>
+                        <p class="article-excerpt">除了捕鱼，升级水族馆设施是赚钱的关键。分析不同装饰物的投资回报率，助您在最短时间内达成百万富翁成就。</p>
+                        <a href="#" class="article-link">阅读全文 &rarr;</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <div class="section-header">
+                <h2 class="section-title">常见问题 (FAQ)</h2>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Q: 第6关“失落遗迹”在哪里解锁？
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    A: 第6关需要完成第5关的所有任务并达到总收集率80%以上才会自动解锁。建议先去完成图鉴收集。
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Q: 为什么有些鱼抓不到？
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    A: 某些稀有鱼类（如蓝鲸）只有在特定的天气或时间条件下才会出现。请尝试在夜间关卡使用夜视道具。
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Q: 如何获取更多的气泡道具？
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    A: 气泡道具可以通过每日登录奖励、完成特定成就或在商店购买获得。合理利用道具是通关的关键。
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-col">
+            <h4>关于本站</h4>
+            <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">
+                怪怪水族馆攻略网致力于为玩家提供最全面、最及时的游戏指南。帮助每一位玩家探索深海，享受游戏乐趣。
+            </p>
+        </div>
+        <div class="footer-col">
+            <h4>快速导航</h4>
+            <ul>
+                <li><a href="#">关卡攻略</a></li>
+                <li><a href="#">鱼类图鉴</a></li>
+                <li><a href="#">隐藏道具</a></li>
+                <li><a href="#">最新更新</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>联系我们</h4>
+            <ul>
+                <li><a href="#">意见反馈</a></li>
+                <li><a href="#">投稿指南</a></li>
+                <li><a href="#">免责声明</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="copyright">
+        &copy; 2023 怪怪水族馆攻略网. All Rights Reserved. 本站内容仅供学习交流使用.
+    </div>
+</footer>
+
+<script>
+    // Simple FAQ Accordion Logic
+    document.addEventListener('DOMContentLoaded', function() {
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                // Close other items
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                // Toggle current item
+                item.classList.toggle('active');
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+          </html>
