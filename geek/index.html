@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Geek下载 - 提供专业、安全、纯净的软件下载服务。涵盖开发工具、系统工具、效率软件及游戏资源，包含详细的功能介绍、版本更新日志及安全检测报告，确保用户下载无忧。">
+    <meta name="keywords" content="geek下载,软件下载,开发工具,系统工具,软件推荐,绿色软件,安全下载">
+    <title>Geek下载 - 专业纯净软件资源与工具下载平台</title>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --accent-green: #10b981;
+            --accent-orange: #f59e0b;
+            --spacing-unit: 1rem;
+            --container-width: 1200px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+            border-radius: 999px;
+            font-weight: 600;
+        }
+
+        .badge-hot { background-color: #fee2e2; color: #ef4444; }
+        .badge-new { background-color: #dbeafe; color: #2563eb; }
+        .badge-safe { background-color: #d1fae5; color: #059669; }
+
+        /* Header */
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo span {
+            color: var(--text-main);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            font-weight: 500;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+        }
+
+        .search-bar {
+            display: flex;
+            background: var(--bg-color);
+            border-radius: 99px;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-color);
+            width: 300px;
+        }
+
+        .search-bar input {
+            border: none;
+            background: transparent;
+            outline: none;
+            width: 100%;
+            font-size: 0.9rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .hero p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-tags {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-tag {
+            background: rgba(255,255,255,0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 99px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .hero-tag:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* Main Layout */
+        .main-content {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 2rem;
+            padding-bottom: 4rem;
+        }
+
+        /* Sidebar */
+        aside .category-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        aside .category-list a {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        aside .category-list a:hover, aside .category-list a.active {
+            background-color: #eff6ff;
+            color: var(--primary-color);
+        }
+
+        .sidebar-section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .sidebar-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .hot-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .hot-list li:last-child {
+            border-bottom: none;
+        }
+
+        .hot-index {
+            font-weight: 800;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        /* Content Area */
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .app-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .app-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .app-icon {
+            width: 64px;
+            height: 64px;
+            background: #f1f5f9;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .app-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+            font-weight: 700;
+        }
+
+        .app-info p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .app-meta {
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            transition: background 0.2s;
+        }
+
+        .download-btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .download-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Safety Tips */
+        .safety-box {
+            background-color: #fff7ed;
+            border: 1px solid #ffedd5;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .safety-icon {
+            color: var(--accent-orange);
+            flex-shrink: 0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1e293b;
+            color: #94a3b8;
+            padding: 3rem 0;
+            margin-top: auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-col a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #334155;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .header-inner {
+                flex-wrap: wrap;
+                height: auto;
+                padding: 1rem 0;
+            }
+
+            nav {
+                display: none; /* Simplified for mobile demo */
+            }
+            
+            .search-bar {
+                width: 100%;
+                margin-top: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-inner">
+            <a href="#" class="logo">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                <span>Geek下载</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">首页</a></li>
+                    <li><a href="#">开发工具</a></li>
+                    <li><a href="#">系统优化</a></li>
+                    <li><a href="#">效率办公</a></li>
+                    <li><a href="#">设计素材</a></li>
+                </ul>
+            </nav>
+            <div class="search-bar">
+                <input type="text" placeholder="搜索软件、驱动、插件...">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>发现优质生产力工具</h1>
+            <p>Geek下载致力于提供经过严格检测的绿色软件、开发工具及系统资源。纯净下载，安全无忧。</p>
+            <div class="hero-tags">
+                <span class="hero-tag">#IDE开发环境</span>
+                <span class="hero-tag">#系统清理</span>
+                <span class="hero-tag">#效率插件</span>
+                <span class="hero-tag">#开源软件</span>
+            </div>
+        </div>
+    </section>
+
+    <main class="container main-content">
+        <!-- Sidebar -->
+        <aside>
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">软件分类</h3>
+                <ul class="category-list">
+                    <li><a href="#" class="active">开发工具 <span>></span></a></li>
+                    <li><a href="#">系统工具 <span>></span></a></li>
+                    <li><a href="#">效率办公 <span>></span></a></li>
+                    <li><a href="#">网络工具 <span>></span></a></li>
+                    <li><a href="#">多媒体 <span>></span></a></li>
+                    <li><a href="#">安全杀毒 <span>></span></a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">本周热门</h3>
+                <ul class="hot-list">
+                    <li><span class="hot-index">1</span> <a href="#">VS Code 最新版</a></li>
+                    <li><span class="hot-index">2</span> <a href="#">火绒安全 6.0</a></li>
+                    <li><span class="hot-index">3</span> <a href="#">Everything 搜索工具</a></li>
+                    <li><span class="hot-index">4</span> <a href="#">Typora Markdown编辑器</a></li>
+                    <li><span class="hot-index">5</span> <a href="#">7-Zip 压缩软件</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Content -->
+        <section class="content-area">
+            <div class="content-header">
+                <h2>热门开发工具推荐</h2>
+                <a href="#" style="color: var(--primary-color); font-size: 0.9rem; font-weight: 500;">查看全部 ></a>
+            </div>
+
+            <div class="grid-layout">
+                <!-- App Card 1 -->
+                <article class="app-card">
+                    <div class="app-icon" style="color: #007acc;">VS</div>
+                    <div class="app-info">
+                        <h3>Visual Studio Code</h3>
+                        <p>微软出品的轻量级但功能强大的代码编辑器，支持多语言，插件丰富，是程序员的必备工具。</p>
+                        <div class="app-meta">
+                            <span class="badge badge-safe">已检测无毒</span>
+                            <span>v1.85.2</span>
+                        </div>
+                    </div>
+                    <a href="#" class="download-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                        立即下载
+                    </a>
+                </article>
+
+                <!-- App Card 2 -->
+                <article class="app-card">
+                    <div class="app-icon" style="color: #e34c26;">&lt;/&gt;</div>
+                    <div class="app-info">
+                        <h3>Sublime Text 4</h3>
+                        <p>极具响应速度的代码编辑器，拥有优雅的界面和强大的多选编辑功能，适合快速开发。</p>
+                        <div class="app-meta">
+                            <span class="badge badge-hot">热榜</span>
+                            <span>v4.1.2</span>
+                        </div>
+                    </div>
+                    <a href="#" class="download-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                        立即下载
+                    </a>
+                </article>
+
+                <!-- App Card 3 -->
+                <article class="app-card">
+                    <div class="app-icon" style="color: #f1e05a;">JS</div>
+                    <div class="app-info">
+                        <h3>Node.js LTS</h3>
+                        <p>基于 Chrome V8 引擎的 JavaScript 运行时，让 JavaScript 可以脱离浏览器运行在服务器端。</p>
+                        <div class="app-meta">
+                            <span class="badge badge-new">新版本</span>
+                            <span>v20.10.0</span>
+                        </div>
+                    </div>
+                    <a href="#" class="download-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                        立即下载
+                    </a>
+                </article>
+
+                <!-- App Card 4 -->
+                <article class="app-card">
+                    <div class="app-icon" style="color: #f05032;">Py</div>
+                    <div class="app-info">
+                        <h3>Python 3.12</h3>
+                        <p>简洁明了的通用编程语言，广泛应用于人工智能、数据科学、Web开发及自动化脚本领域。</p>
+                        <div class="app-meta">
+                            <span class="badge badge-safe">安全</span>
+                            <span>v3.12.0</span>
+                        </div>
+                    </div>
+                    <a href="#" class="download-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                        立即下载
+                    </a>
+                </article>
+
+                <!-- App Card 5 -->
+                <article class="app-card">
+                    <div class="app-icon" style="color: #41b883;">Git</div>
+                    <div class="app-info">
+                        <h3>Git for Windows</h3>
+                        <p>Git 版本控制系统 Windows 客户端，提供 Git Bash 和 Git GUI，方便开发者进行代码管理。</p>
+                        <div class="app-meta">
+                            <span class="badge badge-safe">推荐</span>
+                            <span>v2.43.0</span>
+                        </div>
+                    </div>
+                    <a href="#" class="download-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                        立即下载
+                    </a>
+                </article>
+
+                <!-- App Card 6 -->
+                <article class="app-card">
+                    <div class="app-icon" style="color: #68217a">Docker</div>
+                    <div class="app-info">
+                        <h3>Docker Desktop</h3>
+                        <p>用于构建、发布和运行容器的平台，简化了应用部署流程，提升开发与运维效率。</p>
+                        <div class="app-meta">
+                            <span class="badge badge-hot">热门</span>
+                            <span>v4.25.0</span>
+                        </div>
+                    </div>
+                    <a href="#" class="download-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                        立即下载
+                    </a>
+                </article>
+            </div>
+
+            <div class="safety-box">
+                <div class="safety-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                </div>
+                <div>
+                    <h4 style="color: #c2410c; margin-bottom: 0.25rem;">安全下载提示</h4>
+                    <p style="font-size: 0.9rem; color: #9a3412;">Geek下载所有软件均经过本地杀毒引擎扫描，确保文件完整性与安全性。建议用户在安装时留意安装向导中的附加选项，避免捆绑安装不必要的软件。</p>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>关于 Geek下载</h4>
+                    <p style="font-size: 0.9rem; line-height: 1.6;">Geek下载是一个专注于分享高质量开发工具、系统软件及效率应用的资源平台。我们致力于为极客和开发者提供纯净、快速、安全的下载体验。</p>
+                </div>
+                <div class="footer-col">
+                    <h4>软件分类</h4>
+                    <ul>
+                        <li><a href="#">开发工具</a></li>
+                        <li><a href="#">系统优化</a></li>
+                        <li><a href="#">网络通讯</a></li>
+                        <li><a href="#">多媒体处理</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>帮助中心</h4>
+                    <ul>
+                        <li><a href="#">下载说明</a></li>
+                        <li><a href="#">常见问题</a></li>
+                        <li><a href="#">联系我们</a></li>
+                        <li><a href="#">隐私政策</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Geek下载. All rights reserved. 本站内容仅供学习交流使用。</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+                          </html>
