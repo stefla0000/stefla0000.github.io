@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简谱网 - 全民乐理知识与简谱在线教学平台</title>
+    <meta name="description" content="简谱网提供专业的简谱教学、乐理知识普及、歌曲简谱查询及在线阅读服务。包含基础识谱教程、流行歌曲简谱库、五线谱转换工具及音乐学习社区。">
+    <meta name="keywords" content="简谱网,简谱,乐理知识,歌曲简谱,在线识谱,音乐教学,五线谱转换">
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f5f7fa;
+            --text-main: #333333;
+            --text-light: #666666;
+            --accent-color: #ff6b6b;
+            --border-radius: 8px;
+            --container-width: 1200px;
+            --header-height: 70px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: #ffffff;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s ease;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Header */
+        header {
+            height: var(--header-height);
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+        }
+
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--text-main);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-outline {
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: #fff;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: #357abd;
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: var(--header-height);
+            background: linear-gradient(135deg, #e0f2ff 0%, #ffffff 100%);
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            color: #1a202c;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            background: #fff;
+            border-radius: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 5px;
+        }
+
+        .search-box input {
+            flex: 1;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            outline: none;
+            border-radius: 30px;
+        }
+
+        .search-box button {
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .search-box button:hover {
+            background: #357abd;
+        }
+
+        /* Features */
+        .features {
+            padding: 50px 0;
+            background: #fff;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: #e6f0ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--primary-color);
+            font-size: 24px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        /* Section Titles */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 30px;
+            padding: 0 20px;
+        }
+
+        .section-title h2 {
+            font-size: 28px;
+            color: #1a202c;
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            margin-top: 5px;
+        }
+
+        .view-all {
+            color: var(--primary-color);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .view-all:hover {
+            text-decoration: underline;
+        }
+
+        /* Song Library */
+        .song-library {
+            padding: 50px 0;
+            background: #f8f9fa;
+        }
+
+        .library-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .song-card {
+            background: #fff;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .song-card:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transform: translateY(-3px);
+        }
+
+        .song-cover {
+            height: 140px;
+            background: #e2e8f0;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .song-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .song-tag {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.6);
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .song-info {
+            padding: 15px;
+        }
+
+        .song-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .song-artist {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+
+        .song-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .song-actions button {
+            flex: 1;
+            padding: 6px;
+            font-size: 12px;
+            border: 1px solid #eee;
+            background: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: all 0.2s;
+        }
+
+        .song-actions button:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        /* Tutorial Section */
+        .tutorial-section {
+            padding: 60px 0;
+        }
+
+        .tutorial-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+
+        .tutorial-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .tutorial-item {
+            display: flex;
+            background: #fff;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .tutorial-thumb {
+            width: 180px;
+            background: #cbd5e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .tutorial-content {
+            padding: 20px;
+            flex: 1;
+        }
+
+        .tutorial-content h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .tutorial-content p {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        .tutorial-meta {
+            font-size: 12px;
+            color: #999;
+        }
+
+        /* Sidebar */
+        aside {
+            background: #f8f9fa;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            height: fit-content;
+        }
+
+        .sidebar-widget {
+            margin-bottom: 30px;
+        }
+
+        .sidebar-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .rank-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px dashed #eee;
+            font-size: 14px;
+        }
+
+        .rank-list li:last-child {
+            border-bottom: none;
+        }
+
+        .rank-num {
+            width: 24px;
+            height: 24px;
+            background: #eee;
+            color: #666;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            margin-right: 10px;
+        }
+
+        .rank-list li:nth-child(1) .rank-num { background: #ff6b6b; color: #fff; }
+        .rank-list li:nth-child(2) .rank-num { background: #ff9f43; color: #fff; }
+        .rank-list li:nth-child(3) .rank-num { background: #feca57; color: #fff; }
+
+        .rank-info {
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Tools Section */
+        .tools-section {
+            padding: 60px 0;
+            background: #fff;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .tool-card {
+            border: 1px solid #eee;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .tool-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(74, 144, 226, 0.1);
+        }
+
+        .tool-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a202c;
+            color: #a0aec0;
+            padding: 60px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: #fff;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a:hover {
+            color: #fff;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #2d3748;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-inner {
+                flex-direction: column;
+                height: auto;
+                padding: 15px 0;
+            }
+
+            nav {
+                margin: 15px 0;
+                width: 100%;
+                overflow-x: auto;
+            }
+
+            nav ul {
+                justify-content: flex-start;
+                gap: 20px;
+            }
+
+            .header-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .tutorial-container {
+                grid-template-columns: 1fr;
+            }
+
+            .tutorial-thumb {
+                width: 100%;
+                height: 140px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .search-box {
+                flex-direction: column;
+                padding: 0;
+                background: transparent;
+                box-shadow: none;
+            }
+
+            .search-box input {
+                border-radius: 8px;
+                margin-bottom: 10px;
+            }
+
+            .search-box button {
+                width: 100%;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-inner">
+            <a href="#" class="logo">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+                <span>简谱网</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">首页</a></li>
+                    <li><a href="#">歌曲简谱</a></li>
+                    <li><a href="#">乐理教程</a></li>
+                    <li><a href="#">五线谱转换</a></li>
+                    <li><a href="#">音乐社区</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button class="btn btn-outline">登录</button>
+                <button class="btn btn-primary">注册</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>轻松学会识谱与演奏</h1>
+                <p>汇聚海量流行歌曲简谱、经典老歌及原创乐谱。无论你是零基础初学者，还是进阶演奏者，这里都有你需要的音乐资源。</p>
+                <div class="search-box">
+                    <input type="text" placeholder="输入歌曲名、歌手或简谱代码查找...">
+                    <button>搜索</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="features">
+            <div class="container">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📚</div>
+                        <h3>系统乐理教学</h3>
+                        <p>从基本音阶、音符时值到调式调性，循序渐进的图文教程，帮助零基础快速入门。</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎼</div>
+                        <h3>海量简谱资源</h3>
+                        <p>收录超过10万首歌曲简谱，涵盖流行、民谣、古风、儿歌等各类风格。</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>在线转换工具</h3>
+                        <p>提供五线谱转简谱、简谱转PDF、吉他谱转简谱等实用在线工具。</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎤</div>
+                        <h3>原创乐谱投稿</h3>
+                        <p>支持用户上传原创简谱作品，分享你的音乐才华，参与社区互动。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Song Library -->
+        <section class="song-library">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-title">
+                        <h2>热门简谱推荐</h2>
+                        <p>当下最流行、最受欢迎的简谱作品</p>
+                    </div>
+                    <a href="#" class="view-all">查看全部 &rarr;</a>
+                </div>
+                <div class="library-grid">
+                    <article class="song-card">
+                        <div class="song-cover">
+                            <span class="song-tag">流行</span>
+                            <img src="https://picsum.photos/seed/music1/300/200" alt="歌曲封面">
+                        </div>
+                        <div class="song-info">
+                            <h3 class="song-title">孤勇者</h3>
+                            <p class="song-artist">陈奕迅</p>
+                            <div class="song-actions">
+                                <button>简谱</button>
+                                <button>吉他谱</button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="song-card">
+                        <div class="song-cover">
+                            <span class="song-tag">民谣</span>
+                            <img src="https://picsum.photos/seed/music2/300/200" alt="歌曲封面">
+                        </div>
+                        <div class="song-info">
+                            <h3 class="song-title">成都</h3>
+                            <p class="song-artist">赵雷</p>
+                            <div class="song-actions">
+                                <button>简谱</button>
+                                <button>吉他谱</button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="song-card">
+                        <div class="song-cover">
+                            <span class="song-tag">古风</span>
+                            <img src="https://picsum.photos/seed/music3/300/200" alt="歌曲封面">
+                        </div>
+                        <div class="song-info">
+                            <h3 class="song-title">青花瓷</h3>
+                            <p class="song-artist">周杰伦</p>
+                            <div class="song-actions">
+                                <button>简谱</button>
+                                <button>钢琴谱</button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="song-card">
+                        <div class="song-cover">
+                            <span class="song-tag">儿歌</span>
+                            <img src="https://picsum.photos/seed/music4/300/200" alt="歌曲封面">
+                        </div>
+                        <div class="song-info">
+                            <h3 class="song-title">听我说谢谢你</h3>
+                            <p class="song-artist">小蓓蕾组合</p>
+                            <div class="song-actions">
+                                <button>简谱</button>
+                                <button>钢琴谱</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content Area -->
+        <section class="tutorial-section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-title">
+                        <h2>乐理知识库</h2>
+                        <p>掌握识谱的核心法则</p>
+                    </div>
+                </div>
+                <div class="tutorial-container">
+                    <div class="tutorial-list">
+                        <article class="tutorial-item">
+                            <div class="tutorial-thumb" style="background: #4a90e2;">1</div>
+                            <div class="tutorial-content">
+                                <h3>简谱基础知识：音符与休止符</h3>
+                                <p>学习如何识别全音符、二分音符、四分音符以及休止符。掌握它们在简谱中的写法及代表的时值长短。</p>
+                                <div class="tutorial-meta">阅读量 12.5万 &nbsp;|&nbsp; 发布于 2023-10-15</div>
+                            </div>
+                        </article>
+                        <article class="tutorial-item">
+                            <div class="tutorial-thumb" style="background: #50e3c2;">2</div>
+                            <div class="tutorial-content">
+                                <h3>如何快速识别调号与升降号</h3>
+                                <p>简谱中的“1=C”是什么意思？什么是升号、降号？本文将详细解释调号的概念以及它们对音高的影响。</p>
+                                <div class="tutorial-meta">阅读量 8.2万 &nbsp;|&nbsp; 发布于 2023-10-20</div>
+                            </div>
+                        </article>
+                        <article class="tutorial-item">
+                            <div class="tutorial-thumb" style="background: #f5a623;">3</div>
+                            <div class="tutorial-content">
+                                <h3>节奏训练：切分音与附点音符</h3>
+                                <p>如何唱好切分音？附点音符会让旋律变慢还是变快？通过节奏练习帮助你更好地把握歌曲的律动。</p>
+                                <div class="tutorial-meta">阅读量 6.1万 &nbsp;|&nbsp; 发布于 2023-10-28</div>
+                            </div>
+                        </article>
+                    </div>
+                    <aside>
+                        <div class="sidebar-widget">
+                            <h4 class="sidebar-title">热门分类</h4>
+                            <ul class="rank-list">
+                                <li><a href="#"><span class="rank-info">流行歌曲简谱</span></a></li>
+                                <li><a href="#"><span class="rank-info">钢琴简谱入门</span></a></li>
+                                <li><a href="#"><span class="rank-info">吉他弹唱谱</span></a></li>
+                                <li><a href="#"><span class="rank-info">古风纯音乐</span></a></li>
+                                <li><a href="#"><span class="rank-info">儿歌简谱大全</span></a></li>
+                            </ul>
+                        </div>
+                        <div class="sidebar-widget">
+                            <h4 class="sidebar-title">本周热榜</h4>
+                            <ul class="rank-list">
+                                <li><a href="#"><span class="rank-info">海阔天空 (Beyond)</span></a></li>
+                                <li><a href="#"><span class="rank-info">稻香 (周杰伦)</span></a></li>
+                                <li><a href="#"><span class="rank-info">夜曲 (周杰伦)</span></a></li>
+                                <li><a href="#"><span class="rank-info">十年 (陈奕迅)</span></a></li>
+                                <li><a href="#"><span class="rank-info">平凡之路 (朴树)</span></a></li>
+                            </ul>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tools Section -->
+        <section class="tools-section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-title">
+                        <h2>实用在线工具</h2>
+                        <p>让识谱和制作更简单</p>
+                    </div>
+                </div>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-icon">📝</div>
+                        <h3>简谱转五线谱</h3>
+                        <p style="color:var(--text-light); margin: 10px 0;">上传简谱图片或文本，自动识别并转换为标准五线谱格式。</p>
+                        <button class="btn btn-outline" style="width:100%">立即使用</button>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon">🔊</div>
+                        <h3>简谱试听器</h3>
+                        <p style="color:var(--text-light); margin: 10px 0;">输入简谱数字，在线试听对应的音高和旋律，辅助识谱。</p>
+                        <button class="btn btn-outline" style="width:100%">在线试听</button>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon">🖨️</div>
+                        <h3>简谱打印排版</h3>
+                        <p style="color:var(--text-light); margin: 10px 0;">自定义简谱字体、大小和间距，一键生成适合打印的高清PDF。</p>
+                        <button class="btn btn-outline" style="width:100%">开始排版</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#" class="logo" style="margin-bottom: 20px; display:inline-block;">
+                        <span>简谱网</span>
+                    </a>
+                    <p style="font-size: 14px; line-height: 1.8;">
+                        简谱网致力于推广简谱文化，为音乐爱好者提供便捷的学习平台和丰富的乐谱资源。无论你是想学乐器，还是想练习唱歌，这里都是你的最佳选择。
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="#">关于我们</a></li>
+                        <li><a href="#">版权声明</a></li>
+                        <li><a href="#">广告合作</a></li>
+                        <li><a href="#">联系我们</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>乐谱分类</h4>
+                    <ul>
+                        <li><a href="#">流行歌曲</a></li>
+                        <li><a href="#">民谣弹唱</a></li>
+                        <li><a href="#">钢琴谱</a></li>
+                        <li><a href="#">古风音乐</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>学习资源</h4>
+                    <ul>
+                        <li><a href="#">乐理入门</a></li>
+                        <li><a href="#">识谱技巧</a></li>
+                        <li><a href="#">和弦大全</a></li>
+                        <li><a href="#">节奏训练</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 简谱网 版权所有 | 仅供学习交流使用</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+                                                  </html>
