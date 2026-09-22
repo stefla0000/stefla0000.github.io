@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="欧美影视、音乐、娱乐资讯综合门户，提供最新欧美电影、电视剧、欧美音乐榜单及流行文化深度解读。">
+    <meta name="keywords" content="www.欧美,欧美影视,欧美音乐,欧美娱乐,流行文化,好莱坞,欧美新闻">
+    <title>www.欧美-欧美影视、音乐与流行文化资讯门户</title>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #e50914;
+            --secondary-color: #141414;
+            --accent-color: #46d369;
+            --text-main: #ffffff;
+            --text-muted: #b3b3b3;
+            --bg-body: #0f0f0f;
+            --bg-card: #1f1f1f;
+            --spacing-unit: 1rem;
+            --container-width: 1200px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s ease;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(0, 0, 0, 0.9);
+            border-bottom: 1px solid #333;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--text-main);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--text-main);
+        }
+
+        .search-box {
+            display: flex;
+            background: #333;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .search-box input {
+            background: transparent;
+            border: none;
+            padding: 0.5rem 1rem;
+            color: white;
+            outline: none;
+            width: 200px;
+        }
+
+        .search-box button {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 0 0.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 500px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://picsum.photos/seed/hero1/1920/1080') no-repeat center center/cover;
+            opacity: 0.6;
+            transition: transform 10s ease;
+        }
+
+        .hero:hover .hero-bg {
+            transform: scale(1.05);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 3rem 2rem;
+            background: linear-gradient(to top, var(--bg-body), transparent);
+            width: 100%;
+        }
+
+        .hero-tag {
+            background-color: var(--primary-color);
+            padding: 0.25rem 0.75rem;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 2px;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #f40612;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid white;
+            margin-left: 1rem;
+        }
+
+        .btn-outline:hover {
+            background-color: white;
+            color: black;
+        }
+
+        /* Section Layout */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .section-more {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .section-more:hover {
+            color: var(--primary-color);
+        }
+
+        /* Movie Grid */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        .card-img {
+            position: relative;
+            padding-top: 150%; /* 2:3 Aspect Ratio */
+            overflow: hidden;
+        }
+
+        .card-img img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover .card-img img {
+            transform: scale(1.1);
+        }
+
+        .card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card:hover .card-overlay {
+            opacity: 1;
+        }
+
+        .play-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(5px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .card-content {
+            padding: 1rem;
+        }
+
+        .card-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card-rating {
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        /* Sidebar Layout */
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            .hero {
+                height: 400px;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            nav {
+                display: none; /* Simplified for mobile */
+            }
+            .search-box {
+                display: none;
+            }
+        }
+
+        /* List Style */
+        .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .news-item {
+            display: flex;
+            gap: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .news-item:last-child {
+            border-bottom: none;
+        }
+
+        .news-img {
+            width: 200px;
+            flex-shrink: 0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .news-img img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .news-info h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .news-info h3:hover {
+            color: var(--primary-color);
+        }
+
+        .news-meta {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .news-excerpt {
+            color: #ccc;
+            font-size: 0.95rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Sidebar Widgets */
+        .widget {
+            background-color: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .widget-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            padding-left: 0.75rem;
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .music-list li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .music-list li:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .music-icon {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+        }
+
+        .music-info h4 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .music-info span {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #000;
+            padding: 4rem 0 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid #222;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer-col ul li a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            color: #666;
+            font-size: 0.85rem;
+            padding-top: 2rem;
+            border-top: 1px solid #222;
+        }
+
+        /* Utility */
+        .badge {
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        .badge-hot { background-color: #e50914; }
+        .badge-new { background-color: #46d369; }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-inner">
+            <a href="#" class="logo">www.<span>欧美</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">首页</a></li>
+                    <li><a href="#">欧美影视</a></li>
+                    <li><a href="#">欧美音乐</a></li>
+                    <li><a href="#">欧美娱乐</a></li>
+                    <li><a href="#">欧美游戏</a></li>
+                </ul>
+            </nav>
+            <div class="search-box">
+                <input type="text" placeholder="搜索欧美影视、艺人...">
+                <button>🔍</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-content">
+                <span class="hero-tag">本周热门</span>
+                <h1>沙丘：第二部 - 视觉奇观的极致探索</h1>
+                <p>丹尼斯·维伦纽瓦再次将弗兰克·赫伯特的史诗巨著搬上银幕，本季聚焦保罗·厄崔迪在阿拉基斯星球上的觉醒与复仇之路，特效团队打造了前所未有的沉浸式太空歌剧体验。</p>
+                <div>
+                    <a href="#" class="btn">立即观看</a>
+                    <a href="#" class="btn btn-outline">深度解析</a>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="main-content">
+                <!-- Left Content -->
+                <section class="content-area">
+                    <div class="section-header">
+                        <h2 class="section-title">最新欧美资讯</h2>
+                        <a href="#" class="section-more">查看更多 &raquo;</a>
+                    </div>
+
+                    <div class="news-list">
+                        <article class="news-item">
+                            <div class="news-img">
+                                <img src="https://picsum.photos/seed/news1/300/200" alt="News Thumbnail">
+                            </div>
+                            <div class="news-info">
+                                <div class="news-meta"><span class="badge badge-hot">热门</span> 2023-10-24 | 娱乐快讯</div>
+                                <h3>好莱坞2024年片单前瞻：漫威新英雄与真人版迪士尼童话齐上阵</h3>
+                                <p class="news-excerpt">随着流媒体平台的竞争加剧，各大制片厂纷纷调整战略，今年冬季将有多部重磅科幻与奇幻巨制登陆院线...</p>
+                            </div>
+                        </article>
+
+                        <article class="news-item">
+                            <div class="news-img">
+                                <img src="https://picsum.photos/seed/news2/300/200" alt="News Thumbnail">
+                            </div>
+                            <div class="news-info">
+                                <div class="news-meta">2023-10-23 | 音乐榜单</div>
+                                <h3>Billboard Hot 100 榜单分析：乡村音乐回归主流，流行天后发布新单曲</h3>
+                                <p class="news-excerpt">本周榜单出现明显变化，几位老牌艺人的回归引发了讨论，同时新生代R&B歌手也占据了重要位置...</p>
+                            </div>
+                        </article>
+
+                        <article class="news-item">
+                            <div class="news-img">
+                                <img src="https://picsum.photos/seed/news3/300/200" alt="News Thumbnail">
+                            </div>
+                            <div class="news-info">
+                                <div class="news-meta">2023-10-22 | 深度评论</div>
+                                <h3>流媒体时代下的欧美剧集：短剧崛起与长剧集的生存法则</h3>
+                                <p class="news-excerpt">Netflix与HBO的博弈从未停止，观众注意力被碎片化，剧集制作方如何在保持品质的同时适应新的观看习惯？</p>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="section-header" style="margin-top: 3rem;">
+                        <h2 class="section-title">热门欧美电影</h2>
+                        <a href="#" class="section-more">查看更多 &raquo;</a>
+                    </div>
+
+                    <div class="grid-layout">
+                        <article class="card">
+                            <div class="card-img">
+                                <img src="https://picsum.photos/seed/movie1/300/450" alt="Movie Poster">
+                                <div class="card-overlay">
+                                    <a href="#" class="play-icon">▶</a>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-meta">
+                                    <span>2023</span>
+                                    <span>科幻</span>
+                                </div>
+                                <h3 class="card-title">星际穿越：未解之谜</h3>
+                                <div class="card-rating">★ 9.2</div>
+                            </div>
+                        </article>
+
+                        <article class="card">
+                            <div class="card-img">
+                                <img src="https://picsum.photos/seed/movie2/300/450" alt="Movie Poster">
+                                <div class="card-overlay">
+                                    <a href="#" class="play-icon">▶</a>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-meta">
+                                    <span>2022</span>
+                                    <span>动作</span>
+                                </div>
+                                <h3 class="card-title">暗夜骑士：重生</h3>
+                                <div class="card-rating">★ 8.8</div>
+                            </div>
+                        </article>
+
+                        <article class="card">
+                            <div class="card-img">
+                                <img src="https://picsum.photos/seed/movie3/300/450" alt="Movie Poster">
+                                <div class="card-overlay">
+                                    <a href="#" class="play-icon">▶</a>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-meta">
+                                    <span>2023</span>
+                                    <span>剧情</span>
+                                </div>
+                                <h3 class="card-title">奥本海默传记片</h3>
+                                <div class="card-rating">★ 9.0</div>
+                            </div>
+                        </article>
+
+                        <article class="card">
+                            <div class="card-img">
+                                <img src="https://picsum.photos/seed/movie4/300/450" alt="Movie Poster">
+                                <div class="card-overlay">
+                                    <a href="#" class="play-icon">▶</a>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-meta">
+                                    <span>2021</span>
+                                    <span>惊悚</span>
+                                </div>
+                                <h3 class="card-title">沉默的羔羊：前传</h3>
+                                <div class="card-rating">★ 8.5</div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- Right Sidebar -->
+                <aside class="sidebar">
+                    <div class="widget">
+                        <h3 class="widget-title">欧美音乐榜</h3>
+                        <ul class="music-list">
+                            <li>
+                                <div class="music-icon">🎵</div>
+                                <div class="music-info">
+                                    <h4>Anti-Hero</h4>
+                                    <span>Taylor Swift</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="music-icon">🎵</div>
+                                <div class="music-info">
+                                    <h4>Flowers</h4>
+                                    <span>Miley Cyrus</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="music-icon">🎵</div>
+                                <div class="music-info">
+                                    <h4>As It Was</h4>
+                                    <span>Harry Styles</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="music-icon">🎵</div>
+                                <div class="music-info">
+                                    <h4>Unholy</h4>
+                                    <span>Sam Smith</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="music-icon">🎵</div>
+                                <div class="music-info">
+                                    <h4>Starboy</h4>
+                                    <span>The Weeknd</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="widget">
+                        <h3 class="widget-title">热门标签</h3>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <a href="#" style="background: #333; padding: 5px 10px; border-radius: 15px; font-size: 0.8rem;">#好莱坞</a>
+                            <a href="#" style="background: #333; padding: 5px 10px; border-radius: 15px; font-size: 0.8rem;">#格莱美</a>
+                            <a href="#" style="background: #333; padding: 5px 10px; border-radius: 15px; font-size: 0.8rem;">#漫威</a>
+                            <a href="#" style="background: #333; padding: 5px 10px; border-radius: 15px; font-size: 0.8rem;">#迪士尼</a>
+                            <a href="#" style="background: #333; padding: 5px 10px; border-radius: 15px; font-size: 0.8rem;">#欧美综艺</a>
+                            <a href="#" style="background: #333; padding: 5px 10px; border-radius: 15px; font-size: 0.8rem;">#独立音乐</a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>关于 www.欧美</h4>
+                    <p style="color: #666; font-size: 0.9rem; line-height: 1.6;">
+                        www.欧美 是专注于欧美娱乐内容的一站式资讯平台。我们致力于为用户提供最及时、最全面的欧美电影、电视剧、音乐及流行文化资讯。
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>影视分类</h4>
+                    <ul>
+                        <li><a href="#">科幻电影</a></li>
+                        <li><a href="#">动作大片</a></li>
+                        <li><a href="#">欧美剧集</a></li>
+                        <li><a href="#">动画电影</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>音乐频道</h4>
+                    <ul>
+                        <li><a href="#">流行榜单</a></li>
+                        <li><a href="#">独立摇滚</a></li>
+                        <li><a href="#">嘻哈文化</a></li>
+                        <li><a href="#">电子音乐</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>关注我们</h4>
+                    <ul>
+                        <li><a href="#">Twitter / X</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">YouTube频道</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 www.欧美 版权所有. 仅供演示使用，不提供实际影视资源.
+            </div>
+        </div>
+    </footer>
+
+</body>
+  </html>
