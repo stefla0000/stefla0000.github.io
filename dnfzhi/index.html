@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dnf制裁查询 - 国服官方数据验证与状态实时检测</title>
+    <meta name="description" content="DNF制裁查询工具，提供国服制裁状态实时查询、封号天数计算及制裁规则说明。帮助玩家快速确认账号是否被制裁，了解制裁原因及恢复时间。">
+    <meta name="keywords" content="dnf制裁查询, DNF制裁状态, DNF封号查询, 国服制裁, 阿法利亚营地数据">
+    <style>
+        :root {
+            --primary-color: #1e3a8a; /* 深蓝 */
+            --accent-color: #f59e0b; /* 强调黄/金 */
+            --danger-color: #ef4444; /* 警告红 */
+            --bg-color: #f3f4f6;
+            --card-bg: #ffffff;
+            --text-main: #1f2937;
+            --text-sub: #6b7280;
+            --border-color: #e5e7eb;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* 布局容器 */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 头部 */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* 首屏查询区 */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #3b82f6 100%);
+            padding: 3rem 0;
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .search-box {
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            display: inline-flex;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .search-box input {
+            flex: 1;
+            border: none;
+            padding: 12px 15px;
+            font-size: 1rem;
+            outline: none;
+            border-radius: 6px;
+        }
+
+        .search-box button {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .search-box button:hover {
+            background-color: #d97706;
+        }
+
+        /* 主内容区 */
+        main {
+            flex: 1;
+            padding: 2rem 0;
+        }
+
+        /* 状态卡片 */
+        .status-section {
+            margin-bottom: 3rem;
+        }
+
+        .status-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+            display: none; /* 默认隐藏，查询后显示 */
+            border-top: 5px solid transparent;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .status-card.active {
+            display: block;
+        }
+
+        .status-card.safe {
+            border-top-color: #10b981; /* 绿色 */
+        }
+
+        .status-card.banned {
+            border-top-color: var(--danger-color); /* 红色 */
+        }
+
+        .status-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .status-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .status-desc {
+            color: var(--text-sub);
+            margin-bottom: 1.5rem;
+        }
+
+        .result-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .detail-item label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            margin-bottom: 4px;
+        }
+
+        .detail-item span {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* 信息展示区 */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .info-card h2 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-card ul {
+            list-style: none;
+        }
+
+        .info-card li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+
+        .info-card li:last-child {
+            border-bottom: none;
+        }
+
+        .info-card li strong {
+            color: var(--danger-color);
+        }
+
+        /* 常见问题 */
+        .faq-section {
+            margin-top: 3rem;
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .faq-question {
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+        }
+
+        .faq-question:hover {
+            background-color: #f9fafb;
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            color: var(--text-sub);
+            display: none;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .faq-item.open .faq-answer {
+            display: block;
+        }
+
+        .faq-item.open .faq-question::after {
+            content: '-';
+        }
+
+        .faq-item:not(.open) .faq-question::after {
+            content: '+';
+        }
+
+        /* 页脚 */
+        footer {
+            background-color: #111827;
+            color: #9ca3af;
+            padding: 2rem 0;
+            margin-top: auto;
+            font-size: 0.9rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-links a {
+            color: #9ca3af;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        /* 动画 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 消息提示 */
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                DNF<span>助手</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">首页</a></li>
+                    <li><a href="#">制裁查询</a></li>
+                    <li><a href="#">封号规则</a></li>
+                    <li><a href="#">防封指南</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>DNF制裁查询</h1>
+            <p>输入角色名与大区，快速查询国服制裁状态与封禁天数，避免账号误封损失。</p>
+            <div class="search-box">
+                <input type="text" id="roleInput" placeholder="请输入角色名称 (例如：暗夜使者-月光)" autocomplete="off">
+                <button onclick="checkStatus()">立即查询</button>
+            </div>
+            <p style="margin-top: 10px; font-size: 0.85rem; opacity: 0.8;">支持国服全大区数据查询 | 数据仅供参考</p>
+        </div>
+    </section>
+
+    <main class="container">
+        <!-- 查询结果展示区 -->
+        <section class="status-section">
+            <div id="resultCard" class="status-card">
+                <span id="statusIcon" class="status-icon"></span>
+                <h2 id="statusTitle" class="status-title"></h2>
+                <p id="statusDesc" class="status-desc"></p>
+                
+                <div class="result-details">
+                    <div class="detail-item">
+                        <label>查询角色</label>
+                        <span id="resRole">--</span>
+                    </div>
+                    <div class="detail-item">
+                        <label>所属大区</label>
+                        <span id="resServer">--</span>
+                    </div>
+                    <div class="detail-item">
+                        <label>制裁/封禁天数</label>
+                        <span id="resDays" style="color: var(--danger-color);">--</span>
+                    </div>
+                    <div class="detail-item">
+                        <label>当前状态</label>
+                        <span id="resState">--</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 信息栏目 -->
+        <div class="info-grid">
+            <!-- 左侧：制裁规则 -->
+            <article class="info-card">
+                <h2>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    DNF制裁规则说明
+                </h2>
+                <ul>
+                    <li><strong>恶意破坏游戏环境：</strong>利用BUG、脚本等外挂手段，或进行破坏游戏平衡的行为，将面临永久制裁。</li>
+                    <li><strong>恶意PK行为：</strong>在PK场恶意使用禁止使用的技能、道具，或恶意挂机、使用加速器等作弊行为。</li>
+                    <li><strong>账号安全异常：</strong>异地登录频繁、IP地址异常波动、账号共享等可能导致系统风控制裁。</li>
+                    <li><strong>工作室行为：</strong>使用多开器、批量操作等涉嫌工作室行为的账号，通常会被直接封停。</li>
+                    <li><strong>误封申诉：</strong>若确认为误封，请前往官网客服提交相关凭证进行申诉。</li>
+                </ul>
+            </article>
+
+            <!-- 右侧：防封建议 -->
+            <article class="info-card">
+                <h2>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    防封安全建议
+                </h2>
+                <ul>
+                    <li><strong>拒绝外挂：</strong>绝不使用任何第三方辅助软件，脚本和加速器是封号的主要原因。</li>
+                    <li><strong>规范操作：</strong>避免在短时间内进行大量重复性操作（如搬砖），以免触发系统风控。</li>
+                    <li><strong>账号安全：</strong>定期修改密码，绑定手机和令牌，防止账号被盗后被用于非法交易。</li>
+                    <li><strong>理性消费：</strong>不要参与任何形式的“代练”、“买号”交易，这往往是封号的高发区。</li>
+                    <li><strong>官方渠道：</strong>仅通过腾讯游戏平台登录，避免使用不明来源的启动器。</li>
+                </ul>
+            </article>
+        </div>
+
+        <!-- 常见问题 -->
+        <section class="faq-section">
+            <h2 style="margin-bottom: 1.5rem; font-size: 1.5rem; text-align: center; color: var(--text-main);">常见问题解答</h2>
+            
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">制裁状态多久恢复？</div>
+                <div class="faq-answer">根据制裁等级不同，恢复时间从1小时到永久不等。普通制裁通常在24小时内自动恢复，严重违规可能面临永久封禁。</div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">为什么查询不到我的角色？</div>
+                <div class="faq-answer">查询不到通常意味着该角色不存在或名称输入错误。请检查输入的大区名称是否准确，确保角色名拼写无误。</div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">制裁和封号有什么区别？</div>
+                <div class="faq-answer">制裁通常指短期限制（如1小时、24小时），是系统自动触发的风控措施；封号则是更严重的处罚，通常涉及账号停用或删除，需要人工审核。</div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">申诉渠道在哪里？</div>
+                <div class="faq-answer">如果您确信自己没有违规，可以登录腾讯客服官网（kf.qq.com），选择“DNF”专区进行在线申诉或提交凭证。</div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2023 DNF助手查询网. All Rights Reserved.</p>
+            <div class="footer-links">
+                <a href="#">免责声明</a>
+                <a href="#">隐私政策</a>
+                <a href="#">联系站长</a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="toast" class="toast">请输入角色名称</div>
+
+    <script>
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        function toggleFaq(element) {
+            element.classList.toggle('open');
+        }
+
+        function checkStatus() {
+            const input = document.getElementById('roleInput');
+            const roleName = input.value.trim();
+            const resultCard = document.getElementById('resultCard');
+            const resRole = document.getElementById('resRole');
+            const resServer = document.getElementById('resServer');
+            const resDays = document.getElementById('resDays');
+            const resState = document.getElementById('resState');
+            const statusTitle = document.getElementById('statusTitle');
+            const statusDesc = document.getElementById('statusDesc');
+            const statusIcon = document.getElementById('statusIcon');
+
+            // 简单的模拟逻辑，实际应用中应连接API
+            if (!roleName) {
+                showToast('请输入角色名称进行查询');
+                return;
+            }
+
+            // 模拟加载过程
+            resultCard.style.display = 'none';
+            resultCard.className = 'status-card'; // 重置类
+
+            // 模拟随机结果（为了演示效果）
+            // 在真实环境中，这里会 fetch('api/check.php', ...)
+            setTimeout(() => {
+                const isBanned = Math.random() > 0.5; // 50%概率显示被制裁
+                
+                resultCard.style.display = 'block';
+                
+                if (isBanned) {
+                    // 显示制裁状态
+                    resultCard.classList.add('banned');
+                    statusIcon.textContent = '🚫';
+                    statusTitle.textContent = '检测到制裁状态';
+                    statusDesc.textContent = '您的账号目前处于制裁或封禁状态，请耐心等待恢复或前往官方渠道申诉。';
+                    resRole.textContent = roleName;
+                    resServer.textContent = '国服一区 (示例)';
+                    resDays.textContent = '1 天';
+                    resState.textContent = '制裁中';
+                } else {
+                    // 显示正常状态
+                    resultCard.classList.add('safe');
+                    statusIcon.textContent = '✅';
+                    statusTitle.textContent = '状态正常';
+                    statusDesc.textContent = '您的账号目前未发现制裁记录，请继续保持良好的游戏习惯。';
+                    resRole.textContent = roleName;
+                    resServer.textContent = '国服一区 (示例)';
+                    resDays.textContent = '0 天';
+                    resState.textContent = '正常';
+                }
+            }, 600);
+        }
+
+        // 绑定回车键事件
+        document.getElementById('roleInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                checkStatus();
+            }
+        });
+    </script>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</body>
+</html>
